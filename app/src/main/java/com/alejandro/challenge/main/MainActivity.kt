@@ -1,4 +1,4 @@
-package com.alejandro.challenge
+package com.alejandro.challenge.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
