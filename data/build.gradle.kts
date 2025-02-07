@@ -67,10 +67,14 @@ dependencies {
     implementation(libs.ktor.negotiation)
     implementation(libs.ktor.json)
     implementation(libs.kotlinx.serialization.json)
-    
+
     // chucker
     debugImplementation(libs.chucker.debug)
     releaseImplementation(libs.chucker.release)
+
+    // room
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
