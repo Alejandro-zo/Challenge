@@ -77,6 +77,9 @@ dependencies {
     implementation(libs.splashscreen)
     implementation(libs.icons)
 
+    // lottie
+    implementation(libs.lottie.compose)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
