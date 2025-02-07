@@ -23,11 +23,18 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            isDebuggable = false
+            manifestPlaceholders["app_name"] = "@string/app_name"
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+        }
+        debug {
+            isMinifyEnabled = false
+            manifestPlaceholders["app_name"] = "@string/app_name_dev"
         }
     }
     compileOptions {
