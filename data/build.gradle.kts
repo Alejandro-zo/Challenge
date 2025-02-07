@@ -1,6 +1,10 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.jetbrains.kotlin.serialization)
+    alias(libs.plugins.com.google.devtools.ksp)
 }
 
 android {
@@ -15,12 +19,24 @@ android {
     }
 
     buildTypes {
+        val envFile = project.rootProject.file("enviroments.env")
+        val envProperties = Properties()
+        envProperties.load(envFile.inputStream())
+
+        val baseUrlRelease = envProperties.getProperty("BASE_URL_RELEASE")
+        val baseUrlDebug = envProperties.getProperty("BASE_URL_DEBUG")
+
+
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "BASE_URL", "\"$baseUrlRelease\"")
+        }
+        debug {
+            buildConfigField("String", "BASE_URL", "\"$baseUrlDebug\"")
         }
     }
     compileOptions {
@@ -30,14 +46,36 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.material)
+
+    // hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+
+    //ktor
+    implementation(libs.ktor.core)
+    implementation(libs.ktor.okhttp)
+    implementation(libs.ktor.auth)
+    implementation(libs.ktor.negotiation)
+    implementation(libs.ktor.json)
+    implementation(libs.kotlinx.serialization.json)
+    
+    // chucker
+    debugImplementation(libs.chucker.debug)
+    releaseImplementation(libs.chucker.release)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // modules
+    implementation(project(":domain"))
 }
