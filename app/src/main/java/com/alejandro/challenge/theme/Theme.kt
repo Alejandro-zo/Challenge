@@ -88,8 +88,8 @@ private val LightColorScheme = lightColorScheme(
 
 @Composable
 fun ChallengeTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = false,// Dynamic color is available on Android 12+
+    darkTheme: Boolean = false,
+    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
