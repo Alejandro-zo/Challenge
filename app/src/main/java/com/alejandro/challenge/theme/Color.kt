@@ -2,6 +2,8 @@ package com.alejandro.challenge.theme
 
 import androidx.compose.ui.graphics.Color
 
+val grayPrincipal = Color(0xFF6B7280)
+
 val primaryLight = Color(0xFF00903E)
 val onPrimaryLight = Color(0xFFFFFFFF)
 val primaryContainerLight = Color(0xFFB7F1BA)

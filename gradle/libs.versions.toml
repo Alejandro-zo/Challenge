@@ -22,6 +22,7 @@ splashscreen = "1.0.1"
 ktor = "3.0.3"
 chucker = "4.0.0"
 room = "2.6.1"
+lottie = "6.6.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -59,6 +60,7 @@ chucker-debug = { group = "com.github.chuckerteam.chucker", name = "library", ve
 chucker-release = { group = "com.github.chuckerteam.chucker", name = "library-no-op", version.ref = "chucker" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+lottie-compose = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottie" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
