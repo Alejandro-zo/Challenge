@@ -1,4 +1,4 @@
-package com.alejandro.challenge.ui.theme
+package com.alejandro.challenge.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
