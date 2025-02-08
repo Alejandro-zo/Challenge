@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.alejandro.data.local.room.AppDataBase
 import com.alejandro.data.local.room.dao.AccountDao
+import com.alejandro.data.local.room.dao.UserDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,5 +25,9 @@ object RoomModule {
 
     @Singleton
     @Provides
-    fun providesTokenDao(db: AppDataBase): AccountDao = db.accountDao()
+    fun providesAccountDao(db: AppDataBase): AccountDao = db.accountDao()
+
+    @Singleton
+    @Provides
+    fun providesUserDao(db: AppDataBase): UserDao = db.userDao()
 }
