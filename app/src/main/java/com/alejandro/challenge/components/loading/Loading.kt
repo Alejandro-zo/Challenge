@@ -2,6 +2,7 @@ package com.alejandro.challenge.components.loading
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
@@ -10,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import com.airbnb.lottie.compose.LottieAnimation
@@ -18,6 +20,7 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.alejandro.challenge.R
+import com.alejandro.challenge.components.noRippleClickable
 
 @Composable
 fun Loading() {
@@ -25,7 +28,10 @@ fun Loading() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f)),
+            .background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f))
+            .noRippleClickable(onClick = {})
+            .pointerInput(Unit) { }
+            .focusable(false),
         contentAlignment = Alignment.Center
     ) {
         val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.loading))
