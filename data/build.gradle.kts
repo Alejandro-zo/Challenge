@@ -25,6 +25,10 @@ android {
 
         val baseUrlRelease = envProperties.getProperty("BASE_URL_RELEASE")
         val baseUrlDebug = envProperties.getProperty("BASE_URL_DEBUG")
+        val salt = envProperties.getProperty("SALT")
+        val passwordUser1 = envProperties.getProperty("PASSWORD_USER_1")
+        val passwordUser2 = envProperties.getProperty("PASSWORD_USER_2")
+        val passwordUser3 = envProperties.getProperty("PASSWORD_USER_3")
 
 
         release {
@@ -34,9 +38,17 @@ android {
                 "proguard-rules.pro"
             )
             buildConfigField("String", "BASE_URL", "\"$baseUrlRelease\"")
+            buildConfigField("String", "SALT", "\"$salt\"")
+            buildConfigField("String", "PASSWORD_USER_1", "\"$passwordUser1\"")
+            buildConfigField("String", "PASSWORD_USER_2", "\"$passwordUser2\"")
+            buildConfigField("String", "PASSWORD_USER_3", "\"$passwordUser3\"")
         }
         debug {
             buildConfigField("String", "BASE_URL", "\"$baseUrlDebug\"")
+            buildConfigField("String", "SALT", "\"$salt\"")
+            buildConfigField("String", "PASSWORD_USER_1", "\"$passwordUser1\"")
+            buildConfigField("String", "PASSWORD_USER_2", "\"$passwordUser2\"")
+            buildConfigField("String", "PASSWORD_USER_3", "\"$passwordUser3\"")
         }
     }
     compileOptions {
