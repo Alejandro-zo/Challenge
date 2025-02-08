@@ -15,6 +15,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import com.alejandro.challenge.navigation.AppNavigation
 import com.alejandro.challenge.theme.ChallengeTheme
 import com.alejandro.challenge.theme.surfaceLight
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,7 +42,7 @@ class MainActivity : ComponentActivity() {
                         .fillMaxSize()
                         .background(color = MaterialTheme.colorScheme.surface),
                     content = {
-                        Box(modifier = Modifier.fillMaxSize()) {}
+                        Box(modifier = Modifier.fillMaxSize()) { AppNavigation() }
                     }
                 )
             }
