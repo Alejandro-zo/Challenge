@@ -16,6 +16,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.alejandro.challenge.components.PreviewComponent
+import com.alejandro.challenge.components.isAllowedCharacter
 import com.alejandro.challenge.components.spacer.Spacer8
 import com.alejandro.challenge.components.text.Text14
 import com.alejandro.challenge.theme.grayPrincipal
@@ -52,7 +53,9 @@ fun TexFieldBase(
 
         OutlinedTextField(
             value = value,
-            onValueChange = onValueChange,
+            onValueChange = { input ->
+                onValueChange(input.filter { it.isAllowedCharacter() })
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .onFocusChanged { },
