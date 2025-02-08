@@ -1,4 +1,26 @@
 <resources>
     <string name="app_name">Challenge</string>
     <string name="app_name_dev">Dev Challenge</string>
+
+    <string name="accept">Aceptar</string>
+
+    <!--    Login-->
+    <string name="enter">Ingresar</string>
+    <string name="username">Usuario</string>
+    <string name="enter_your_username">Ingresa tu usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="enter_your_password">Ingresa tu contraseña</string>
+    <string name="logo_interbank">Logo interbank</string>
+
+    <!--    Error-->
+
+    <string name="un_authorize_error">La sesión ha caducado</string>
+    <string name="generic_error_message">!Algo salió mal, inténtalo de nuevo!</string>
+    <string name="un_authorize_error_message">Estimado cliente, su sesión ha expirado</string>
+    <string name="error">Error</string>
+
+    <!--    Icon content description-->
+    <string name="icon_image_vector_content_description">Icon image vector content description</string>
+    <string name="icon_image_vector_no_ripple_clickable_content_description">Icon image vector no ripple clickable content description</string>
+    <string name="icon_painter_no_ripple_clickable_content_description">Icon painter no ripple clickable content description</string>
 </resources>
