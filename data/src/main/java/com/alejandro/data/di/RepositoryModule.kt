@@ -1,7 +1,7 @@
 package com.alejandro.data.di
 
-import com.alejandro.data.repository.AuthDriverRepositoryImpl
-import com.alejandro.domain.repository.AuthDriverRepository
+import com.alejandro.data.repository.AuthRepositoryImpl
+import com.alejandro.domain.repository.AuthRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,5 +14,5 @@ abstract class RepositoryModule {
 
     @Binds
     @Singleton
-    abstract fun bindAuthDriverRepository(authDriverRepositoryImpl: AuthDriverRepositoryImpl): AuthDriverRepository
+    abstract fun bindAuthRepository(authDriverRepositoryImpl: AuthRepositoryImpl): AuthRepository
 }

@@ -4,7 +4,7 @@ import com.alejandro.data.BuildConfig
 import com.alejandro.data.local.room.dao.UserDao
 import com.alejandro.data.local.room.entity.UserDb
 import com.alejandro.data.remote.api.AuthDriverApi
-import com.alejandro.domain.repository.AuthDriverRepository
+import com.alejandro.domain.repository.AuthRepository
 import com.alejandro.domain.util.Constants.USER_1
 import com.alejandro.domain.util.Constants.USER_2
 import com.alejandro.domain.util.Constants.USER_3
@@ -12,11 +12,11 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class AuthDriverRepositoryImpl @Inject constructor(
+class AuthRepositoryImpl @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher,
     private val authDriverApi: AuthDriverApi,
     private val userDao: UserDao,
-) : AuthDriverRepository {
+) : AuthRepository {
     override suspend fun login(userName: String, password: String) = withContext(ioDispatcher) {
         authDriverApi.loginDriver(userName, password)
     }
