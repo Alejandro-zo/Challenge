@@ -1,6 +1,6 @@
 package com.alejandro.domain.repository
 
-interface AuthDriverRepository {
+interface AuthRepository {
 
     suspend fun login(userName: String, password: String)
 

@@ -2,7 +2,7 @@ package com.alejandro.challenge.feature.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alejandro.domain.repository.AuthDriverRepository
+import com.alejandro.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val authDriverRepository: AuthDriverRepository,
+    private val authRepository: AuthRepository,
 ) : ViewModel() {
 
     private val _uiState: MutableStateFlow<UiState> = MutableStateFlow(UiState())
@@ -33,7 +33,7 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun insertDate() = viewModelScope.launch {
-        authDriverRepository.saveUser()
+        authRepository.saveUser()
     }
 
     private fun userChanged(value: String) {
@@ -53,7 +53,7 @@ class LoginViewModel @Inject constructor(
     private fun buttonClickedEnter() = viewModelScope.launch {
         _uiState.update { it.copy(isLoading = true) }
         try {
-            authDriverRepository.login(_formState.value.user, _formState.value.password)
+            authRepository.login(_formState.value.user, _formState.value.password)
             _uiState.update { it.copy(navigateToHome = true) }
         } catch (error: Throwable) {
             _uiState.update { it.copy(error = error, isLoading = false) }
