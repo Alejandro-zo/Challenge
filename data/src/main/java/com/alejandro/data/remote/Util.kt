@@ -14,10 +14,10 @@ suspend inline fun <reified T> validate(response: HttpResponse): T? {
             response.status == HttpStatusCode.OK && responseWrapper.success == true -> {
                 responseWrapper.data
             }
-            else -> throw GenericException(message = responseWrapper.message)
+            else -> throw GenericException()
 
         }
-    } catch (_: Exception) {
+    } catch (e: Exception) {
         throw GenericException()
     }
 }
