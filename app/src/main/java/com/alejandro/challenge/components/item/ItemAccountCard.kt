@@ -25,7 +25,7 @@ import com.alejandro.domain.entity.Account
 import com.alejandro.domain.util.formatNumber
 
 @Composable
-fun ItemAccount(
+fun ItemAccountCard(
     modifier: Modifier = Modifier,
     account: Account,
     onClickAccount: () -> Unit,
@@ -34,32 +34,39 @@ fun ItemAccount(
         modifier = modifier.clickable { onClickAccount() }
     ) {
 
-        Row(
-            modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-
-            Image(
-                painter = painterResource(R.drawable.ic_logo),
-                contentDescription = stringResource(R.string.icon_image_vector_logo)
-            )
-
-            SpacerWidth(24.dp)
-
-            Column(modifier = Modifier.weight(1f)) {
-
-                Text16(account.description)
-
-                Spacer12()
-
-                Text20SemiBold("${account.currency} ${formatNumber(account.amount)}")
-            }
-        }
+        ItemAccount(modifier = Modifier.padding(16.dp), account = account)
 
     }
 }
+
+@Composable
+fun ItemAccount(
+    modifier: Modifier = Modifier,
+    account: Account,
+) {
+    Row(
+        modifier.fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+
+        Image(
+            painter = painterResource(R.drawable.ic_logo),
+            contentDescription = stringResource(R.string.icon_image_vector_logo)
+        )
+
+        SpacerWidth(24.dp)
+
+        Column(modifier = Modifier.weight(1f)) {
+
+            Text16(account.description)
+
+            Spacer12()
+
+            Text20SemiBold("${account.currency} ${formatNumber(account.amount)}")
+        }
+    }
+}
+
 
 @Composable
 fun ItemAccountError(
@@ -98,7 +105,7 @@ private fun ItemAccountErrorPreview() {
     PreviewComponent {
 
         Column {
-            ItemAccount(account = account, onClickAccount = {})
+            ItemAccountCard(account = account, onClickAccount = {})
 
             Spacer26()
 
