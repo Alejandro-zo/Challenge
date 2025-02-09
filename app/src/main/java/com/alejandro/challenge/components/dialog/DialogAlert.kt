@@ -17,7 +17,6 @@ import com.alejandro.challenge.components.spacer.Spacer24
 import com.alejandro.challenge.components.spacer.Spacer8
 import com.alejandro.challenge.components.text.Text16Medium
 import com.alejandro.challenge.components.text.Text20SemiBold
-import com.alejandro.domain.util.Constants.EMPTY_STRING
 import com.alejandro.domain.util.Constants.LOGIN_ERROR_MESSAGE
 
 @Composable
@@ -25,9 +24,9 @@ fun DialogAlert(
     modifier: Modifier = Modifier,
     icon: Int = R.drawable.ic_no_service,
     onDismissDefault: Boolean = false,
-    message: String = EMPTY_STRING,
+    message: String? = null,
     textButton: String = stringResource(R.string.accept),
-    title: String = stringResource(R.string.error),
+    title: String? = null,
     onDismiss: () -> Unit = {},
     onClickButton: () -> Unit = {},
 ) {
@@ -47,11 +46,15 @@ fun DialogAlert(
 
         Spacer24()
 
-        Text20SemiBold(text = title, textAlign = TextAlign.Center)
+        title?.let {
+            Text20SemiBold(text = title, textAlign = TextAlign.Center)
 
-        Spacer8()
+            Spacer8()
+        }
 
-        Text16Medium(text = message, textAlign = TextAlign.Center)
+        message?.let {
+            Text16Medium(text = message, textAlign = TextAlign.Center)
+        }
 
         Spacer24()
 
