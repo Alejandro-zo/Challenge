@@ -12,8 +12,15 @@ fun AppNavigation() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = LoginDestination) {
         composable<LoginDestination> {
-            LoginScreen(navigateToHome = {})
+            LoginScreen(
+                navigateToHome = {
+                    navController.popBackStack()
+                    navController.navigateToAuthGraph()
+                }
+            )
         }
+
+        authGraph(navController::navigateToBack)
 
     }
 }

@@ -8,5 +8,18 @@ import kotlinx.serialization.Serializable
  */
 
 @Serializable
-@SerialName("LoginDriverDestination")
+@SerialName("LoginDestination")
 data object LoginDestination
+
+/**
+ * Home
+ */
+
+@Serializable
+@SerialName("MainGraph")
+data object MainGraph
+
+@Serializable
+@SerialName("HomeDestination")
+data object HomeDestination
+
