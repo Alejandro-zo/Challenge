@@ -21,3 +21,12 @@ fun Account.totoDataBase(): AccountDb {
         description = description,
     )
 }
+
+fun AccountDb.toDomain(): Account {
+    return Account(
+        accountNumber = accountNumber,
+        currency = currency,
+        amount = amount,
+        description = description,
+    )
+}
