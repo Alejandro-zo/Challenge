@@ -23,13 +23,16 @@ fun BaseScreen(
     verticalArrangement: Arrangement.Vertical = Arrangement.Top,
     horizontalAlignment: Alignment.Horizontal = Alignment.Start,
     paddingValues: PaddingValues = PaddingValues(horizontal = 16.dp),
-    content: @Composable ColumnScope.() -> Unit
+    topBar: @Composable () -> Unit = {},
+    content: @Composable ColumnScope.() -> Unit,
 ) {
     Scaffold(
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxSize(),
+        topBar = topBar,
     ) {
         Column(
-            modifier = modifier.padding(it)
+            modifier = modifier
+                .padding(it)
                 .fillMaxSize()
                 .padding(paddingValues),
             verticalArrangement = verticalArrangement,

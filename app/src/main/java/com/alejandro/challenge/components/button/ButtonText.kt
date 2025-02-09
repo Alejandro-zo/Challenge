@@ -24,13 +24,35 @@ fun ButtonText(
     }
 }
 
+@Composable
+fun ButtonWrapText(
+    text: String,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+    onClick: () -> Unit,
+
+    ) {
+    ButtonWrapContent (
+        modifier = modifier,
+        enabled = enabled,
+        onClick = { onClick() }
+    ) {
+        Text16Medium(text)
+    }
+}
+
 @Preview(name = "Light", uiMode = Configuration.UI_MODE_NIGHT_NO)
 @Composable
 private fun ButtonTextPreview() {
     PreviewComponent {
         ButtonText(
             text = "Value",
-            onClick = {}
+            onClick = {},
+        )
+
+        ButtonWrapText(
+            text = "Value",
+            onClick = {},
         )
     }
 }
