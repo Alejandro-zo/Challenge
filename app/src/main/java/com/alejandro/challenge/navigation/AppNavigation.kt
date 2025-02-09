@@ -20,7 +20,7 @@ fun AppNavigation() {
             )
         }
 
-        authGraph(navController::navigateToBack)
+        authGraph(navController,navController::navigateToBack)
 
     }
 }

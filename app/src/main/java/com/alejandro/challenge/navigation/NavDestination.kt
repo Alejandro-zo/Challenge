@@ -23,3 +23,6 @@ data object MainGraph
 @SerialName("HomeDestination")
 data object HomeDestination
 
+@Serializable
+@SerialName("ProductDetailDestination")
+data class ProductDetailDestination(val accountNumber: String)
