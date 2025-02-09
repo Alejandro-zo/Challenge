@@ -1,6 +1,6 @@
 package com.alejandro.data.remote.api
 
-interface AuthDriverApi {
+interface AuthApi {
 
     suspend fun loginDriver(userName: String, password: String)
 

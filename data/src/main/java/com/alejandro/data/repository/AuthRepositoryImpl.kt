@@ -3,7 +3,7 @@ package com.alejandro.data.repository
 import com.alejandro.data.BuildConfig
 import com.alejandro.data.local.room.dao.UserDao
 import com.alejandro.data.local.room.entity.UserDb
-import com.alejandro.data.remote.api.AuthDriverApi
+import com.alejandro.data.remote.api.AuthApi
 import com.alejandro.domain.repository.AuthRepository
 import com.alejandro.domain.util.Constants.USER_1
 import com.alejandro.domain.util.Constants.USER_2
@@ -14,11 +14,11 @@ import javax.inject.Inject
 
 class AuthRepositoryImpl @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher,
-    private val authDriverApi: AuthDriverApi,
+    private val authApi: AuthApi,
     private val userDao: UserDao,
 ) : AuthRepository {
     override suspend fun login(userName: String, password: String) = withContext(ioDispatcher) {
-        authDriverApi.loginDriver(userName, password)
+        authApi.loginDriver(userName, password)
     }
 
     override suspend fun saveUser() = withContext(ioDispatcher) {

@@ -1,7 +1,9 @@
 package com.alejandro.data.di
 
-import com.alejandro.data.remote.api.AuthDriverApi
-import com.alejandro.data.remote.ktor.AuthDriverApiImpl
+import com.alejandro.data.remote.api.AccountApi
+import com.alejandro.data.remote.api.AuthApi
+import com.alejandro.data.remote.ktor.AccountApiImpl
+import com.alejandro.data.remote.ktor.AuthApiImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -14,5 +16,9 @@ abstract class ApiModule {
 
     @Binds
     @Singleton
-    abstract fun bindAuthDriverApi(userDriverApiImpl: AuthDriverApiImpl): AuthDriverApi
+    abstract fun bindAuthApi(authApiImpl: AuthApiImpl): AuthApi
+
+    @Binds
+    @Singleton
+    abstract fun bindAccountApi(accountApiImpl: AccountApiImpl): AccountApi
 }
