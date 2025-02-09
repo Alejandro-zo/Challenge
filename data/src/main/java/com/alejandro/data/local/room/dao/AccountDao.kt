@@ -11,9 +11,10 @@ interface AccountDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAccount(accountDb: AccountDb)
 
-    @Query("select  * from account where account = :accountNumber limit 1")
+    @Query("select  * from account where accountNumber = :accountNumber limit 1")
     suspend fun getAccountByAccountNumber(accountNumber: String): AccountDb?
 
     @Query("delete from account")
     suspend fun deleteAllAccount()
 }
+
