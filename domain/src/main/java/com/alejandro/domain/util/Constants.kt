@@ -7,4 +7,6 @@ object Constants {
     const val USER_1 = "userTest1"
     const val USER_2 = "User@test"
     const val USER_3 = "user123&"
+    const val POSITIVE_SIGN = "+"
+    const val YOU_HAVE_NO_MOVEMENTS = "Mi número de Cuenta es: "
 }
