@@ -7,14 +7,34 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navOptions
 import androidx.navigation.navigation
 import com.alejandro.challenge.feature.home.HomeScreen
+import com.alejandro.challenge.feature.productdetail.ProductDetailScreen
 
-fun NavGraphBuilder.authGraph(navigationToBack: () -> Unit) {
+fun NavGraphBuilder.authGraph(
+    navController: NavController,
+    navigationToBack: () -> Unit
+) {
     navigation<MainGraph>(startDestination = HomeDestination) {
 
         composable<HomeDestination> {
             HomeScreen(
                 navigateToLogin = {},
-                navigateToAccountDetail = { },
+                navigateToAccountDetail = {
+                    navController.navigate(ProductDetailDestination(it))
+                },
+            )
+        }
+
+        composable<ProductDetailDestination> {
+            ProductDetailScreen(
+                navigateToBack = navigationToBack,
+                navigateToLogin = {
+                    navController.navigate(
+                        route = LoginDestination,
+                        navOptions = navOptions {
+                            popUpTo(navController.graph.id) { inclusive = true }
+                        }
+                    )
+                },
             )
         }
     }
