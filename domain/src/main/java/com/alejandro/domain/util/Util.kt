@@ -1,7 +1,10 @@
 package com.alejandro.domain.util
 
+import java.net.UnknownHostException
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
+import java.text.NumberFormat
+import java.util.Locale
 
 fun encryptSHA512(password: String, salt: String): String {
     var generatedPassword = ""
@@ -18,4 +21,15 @@ fun encryptSHA512(password: String, salt: String): String {
         e.printStackTrace()
     }
     return generatedPassword
+}
+
+fun formatNumber(number: Double, decimalPlaces: Int = 2): String {
+    val numberFormat = NumberFormat.getNumberInstance(Locale.US)
+    numberFormat.minimumFractionDigits = decimalPlaces
+    numberFormat.maximumFractionDigits = decimalPlaces
+    return numberFormat.format(number)
+}
+
+fun Throwable.isUnknownHostException(): Boolean {
+    return (this is UnknownHostException)
 }
