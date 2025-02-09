@@ -78,3 +78,8 @@ fun Spacer30() {
 fun Spacer32() {
     Spacer(modifier = Modifier.height(32.dp))
 }
+
+@Composable
+fun Spacer54() {
+    Spacer(modifier = Modifier.height(54.dp))
+}
