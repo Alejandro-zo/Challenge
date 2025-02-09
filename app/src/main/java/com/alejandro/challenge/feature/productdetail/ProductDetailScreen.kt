@@ -1,4 +1,4 @@
-package com.alejandro.challenge.feature.home
+package com.alejandro.challenge.feature.productdetail
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -19,19 +19,20 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.alejandro.challenge.R
 import com.alejandro.challenge.components.PreviewComponent
 import com.alejandro.challenge.components.basescreen.BaseScreen
-import com.alejandro.challenge.components.conteiner.PullToRefreshBase
 import com.alejandro.challenge.components.error.ErrorHandle
-import com.alejandro.challenge.components.item.ItemAccountCard
-import com.alejandro.challenge.components.item.ItemAccountError
+import com.alejandro.challenge.components.item.AccountDetail
+import com.alejandro.challenge.components.item.ItemMovementCard
 import com.alejandro.challenge.components.loading.Loading
 import com.alejandro.challenge.components.spacer.Spacer24
-import com.alejandro.challenge.components.topbar.TopBarTitle
+import com.alejandro.challenge.components.text.Text14
+import com.alejandro.challenge.components.text.Text16SemiBold
+import com.alejandro.challenge.components.topbar.TopBarBack
 
 @Composable
-fun HomeScreen(
-    viewModel: HomeViewModel = hiltViewModel(),
+fun ProductDetailScreen(
+    viewModel: ProductDetailViewModel = hiltViewModel(),
     navigateToLogin: () -> Unit,
-    navigateToAccountDetail: (String) -> Unit,
+    navigateToBack: () -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     var showError by remember { mutableStateOf(false) }
@@ -40,23 +41,17 @@ fun HomeScreen(
 
     LaunchedEffect(uiState.error) { showError = (uiState.error != null) }
 
-    PullToRefreshBase(
-        isRefreshing = uiState.isRefreshing,
-        onRefresh = { viewModel.handleUiEvent(UiEvent.OnRefresh) }
-    ) {
-        HomeScreenContent(
-            uiState = uiState,
-            sendUiEvent = viewModel::handleUiEvent
-        )
+    ProductDetailContent(
+        uiState = uiState,
+        navigateToBack = navigateToBack,
+    )
+
+    LaunchedEffect(uiState.navigateToLogin) {
+        if (uiState.navigateToLogin) navigateToLogin()
     }
 
     if (uiState.isLoading) {
         Loading()
-    }
-
-    if (uiState.navigateToAccountDetail) {
-        navigateToAccountDetail(uiState.accountNumber)
-        viewModel.handleUiEvent(UiEvent.ResetNavigation)
     }
 
     if (showError) {
@@ -65,37 +60,43 @@ fun HomeScreen(
                 error = it,
                 onDismiss = { viewModel.handleUiEvent(UiEvent.HideError) },
                 onUnAuthorize = { viewModel.handleUiEvent(UiEvent.HideError) },
-                onRetry = { viewModel.handleUiEvent(UiEvent.Retry) },
             )
         }
     }
 }
 
 @Composable
-private fun HomeScreenContent(
+private fun ProductDetailContent(
     uiState: UiState,
-    sendUiEvent: (UiEvent) -> Unit,
+    navigateToBack: () -> Unit,
 ) {
     BaseScreen(
-        topBar = { TopBarTitle(stringResource(R.string.product)) }
+        topBar = { TopBarBack(stringResource(R.string.queries)) { navigateToBack() } }
     ) {
 
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
-            if (uiState.errorData) {
-                item {
-                    ItemAccountError(
-                        modifier = Modifier.padding(horizontal = 16.dp),
-                        message = stringResource(uiState.messageErrorData)
-                    )
-                }
-            }
+        uiState.account?.let { AccountDetail(account = it) }
 
-            items(uiState.listAccount) { account ->
+        Spacer24()
 
-                ItemAccountCard(
-                    modifier = Modifier.padding(horizontal = 16.dp),
-                    account = account,
-                    onClickAccount = { sendUiEvent(UiEvent.ClickAccount(account)) }
+        Text16SemiBold(stringResource(R.string.movements))
+
+        Spacer24()
+
+        if (uiState.listMovements.isEmpty()) {
+            Text14(stringResource(R.string.you_have_no_movements))
+        }
+
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp)
+        ) {
+
+            items(uiState.listMovements) { movement ->
+
+                ItemMovementCard(
+                    movement = movement,
+                    currency = uiState.account?.currency.orEmpty()
                 )
 
                 Spacer24()
@@ -108,9 +109,9 @@ private fun HomeScreenContent(
 @Composable
 private fun HomeScreenContentPreview() {
     PreviewComponent {
-        HomeScreenContent(
+        ProductDetailContent(
             uiState = UiState(),
-            sendUiEvent = {},
+            navigateToBack = {},
         )
     }
 }
