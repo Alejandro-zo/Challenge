@@ -18,6 +18,12 @@
     <string name="failed_to_get_accounts">No se pudo obtener las cuentas.</string>
     <string name="failed_to_update_accounts">No se han podido cargar las cuentas, inténtelo de nuevo.</string>
 
+    <!--    Product detail-->
+    <string name="account_number">Número de cuenta</string>
+    <string name="queries">Consultas</string>
+    <string name="movements">Movimientos</string>
+    <string name="you_have_no_movements">Aun no tienes movimientos</string>
+
     <!--    Error-->
 
     <string name="un_authorize_error">La sesión ha caducado</string>
