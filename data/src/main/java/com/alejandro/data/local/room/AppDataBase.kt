@@ -3,8 +3,10 @@ package com.alejandro.data.local.room
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.alejandro.data.local.room.dao.AccountDao
+import com.alejandro.data.local.room.dao.AppParameterDao
 import com.alejandro.data.local.room.dao.UserDao
 import com.alejandro.data.local.room.entity.AccountDb
+import com.alejandro.data.local.room.entity.AppParameterDb
 import com.alejandro.data.local.room.entity.UserDb
 
 @Database(
@@ -12,6 +14,7 @@ import com.alejandro.data.local.room.entity.UserDb
     entities = [
         AccountDb::class,
         UserDb::class,
+        AppParameterDb::class,
     ]
 )
 
@@ -20,4 +23,6 @@ abstract class AppDataBase : RoomDatabase() {
     abstract fun accountDao(): AccountDao
 
     abstract fun userDao(): UserDao
+
+    abstract fun appParameterDao(): AppParameterDao
 }
