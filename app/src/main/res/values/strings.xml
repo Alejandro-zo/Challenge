@@ -34,6 +34,7 @@
     <string name="network_error">Error de conexión</string>
     <string name="an_error_has_occurred_please_try_again">Ha ocurrido un error, vuelve a intentarlo.</string>
     <string name="try_again">Vuelve a intentarlo.</string>
+    <string name="un_authorize_message">Vuelva a iniciar sesión para continuar.</string>
 
     <!--    Icon content description-->
     <string name="icon_image_vector_content_description">Icon image vector content description</string>
