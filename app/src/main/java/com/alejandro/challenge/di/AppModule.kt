@@ -1,5 +1,7 @@
 package com.alejandro.challenge.di
 
+import com.alejandro.challenge.main.SessionViewModel
+import com.alejandro.domain.repository.AppParameterRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,4 +17,11 @@ object AppModule {
     @Singleton
     @Provides
     fun provideIoDispatcher(): CoroutineDispatcher = Dispatchers.IO
+
+    @Singleton
+    @Provides
+    fun providesInactivityViewModel(
+        ioDispatcher: CoroutineDispatcher,
+        appParameterRepository: AppParameterRepository,
+    ): SessionViewModel = SessionViewModel(ioDispatcher, appParameterRepository)
 }

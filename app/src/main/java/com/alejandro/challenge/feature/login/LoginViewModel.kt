@@ -2,6 +2,7 @@ package com.alejandro.challenge.feature.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.alejandro.domain.repository.AppParameterRepository
 import com.alejandro.domain.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,6 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val authRepository: AuthRepository,
+    private val appParameterRepository: AppParameterRepository
 ) : ViewModel() {
 
     private val _uiState: MutableStateFlow<UiState> = MutableStateFlow(UiState())
@@ -34,6 +36,11 @@ class LoginViewModel @Inject constructor(
 
     private fun insertDate() = viewModelScope.launch {
         authRepository.saveUser()
+        deleteSession()
+    }
+
+    private fun deleteSession() = viewModelScope.launch {
+        appParameterRepository.deleteAllParameter()
     }
 
     private fun userChanged(value: String) {

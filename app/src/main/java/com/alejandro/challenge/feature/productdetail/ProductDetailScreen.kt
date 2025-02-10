@@ -31,7 +31,6 @@ import com.alejandro.challenge.components.topbar.TopBarBack
 @Composable
 fun ProductDetailScreen(
     viewModel: ProductDetailViewModel = hiltViewModel(),
-    navigateToLogin: () -> Unit,
     navigateToBack: () -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -45,10 +44,6 @@ fun ProductDetailScreen(
         uiState = uiState,
         navigateToBack = navigateToBack,
     )
-
-    LaunchedEffect(uiState.navigateToLogin) {
-        if (uiState.navigateToLogin) navigateToLogin()
-    }
 
     if (uiState.isLoading) {
         Loading()

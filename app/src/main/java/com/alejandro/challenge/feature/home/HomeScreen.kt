@@ -26,17 +26,19 @@ import com.alejandro.challenge.components.item.ItemAccountError
 import com.alejandro.challenge.components.loading.Loading
 import com.alejandro.challenge.components.spacer.Spacer24
 import com.alejandro.challenge.components.topbar.TopBarTitle
+import com.alejandro.challenge.main.SessionViewModel
 
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
-    navigateToLogin: () -> Unit,
+    sessionViewModel: SessionViewModel = hiltViewModel(),
     navigateToAccountDetail: (String) -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     var showError by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) { viewModel.handleUiEvent(UiEvent.ServiceData) }
+    LaunchedEffect(Unit) { sessionViewModel.updateLastActivity() }
 
     LaunchedEffect(uiState.error) { showError = (uiState.error != null) }
 
