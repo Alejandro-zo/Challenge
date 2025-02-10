@@ -17,7 +17,6 @@ fun NavGraphBuilder.authGraph(
 
         composable<HomeDestination> {
             HomeScreen(
-                navigateToLogin = {},
                 navigateToAccountDetail = {
                     navController.navigate(ProductDetailDestination(it))
                 },
@@ -25,17 +24,7 @@ fun NavGraphBuilder.authGraph(
         }
 
         composable<ProductDetailDestination> {
-            ProductDetailScreen(
-                navigateToBack = navigationToBack,
-                navigateToLogin = {
-                    navController.navigate(
-                        route = LoginDestination,
-                        navOptions = navOptions {
-                            popUpTo(navController.graph.id) { inclusive = true }
-                        }
-                    )
-                },
-            )
+            ProductDetailScreen(navigateToBack = navigationToBack,)
         }
     }
 }

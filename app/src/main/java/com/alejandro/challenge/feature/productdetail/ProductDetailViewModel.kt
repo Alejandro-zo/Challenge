@@ -31,7 +31,6 @@ class ProductDetailViewModel @Inject constructor(
     fun handleUiEvent(uiEvent: UiEvent) {
         when (uiEvent) {
             is UiEvent.ServiceData -> getMovements()
-            is UiEvent.ResetNavigation -> resetNavigation()
             is UiEvent.HideError -> _uiState.update { it.copy(error = null) }
         }
     }
@@ -56,9 +55,5 @@ class ProductDetailViewModel @Inject constructor(
 
     private fun handleError(error: Throwable) {
         _uiState.update { it.copy(isLoading = false, error = error) }
-    }
-
-    private fun resetNavigation() {
-        _uiState.update { it.copy(navigateToLogin = false) }
     }
 }
