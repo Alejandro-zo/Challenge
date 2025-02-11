@@ -1,7 +1,8 @@
 package com.alejandro.challenge.di
 
 import com.alejandro.challenge.main.SessionViewModel
-import com.alejandro.domain.repository.AppParameterRepository
+import com.alejandro.domain.usecase.appparameters.DeleteAllParameterUseCase
+import com.alejandro.domain.usecase.appparameters.GetSessionTimeUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,6 +23,8 @@ object AppModule {
     @Provides
     fun providesInactivityViewModel(
         ioDispatcher: CoroutineDispatcher,
-        appParameterRepository: AppParameterRepository,
-    ): SessionViewModel = SessionViewModel(ioDispatcher, appParameterRepository)
+        getSessionTimeUseCase: GetSessionTimeUseCase,
+        deleteAllParameterUseCase: DeleteAllParameterUseCase,
+    ): SessionViewModel =
+        SessionViewModel(ioDispatcher, getSessionTimeUseCase, deleteAllParameterUseCase)
 }

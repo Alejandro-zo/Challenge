@@ -3,7 +3,8 @@ package com.alejandro.challenge.feature.productdetail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alejandro.domain.repository.AccountRepository
+import com.alejandro.domain.usecase.account.GetAccountByAccountNumberUseCase
+import com.alejandro.domain.usecase.account.GetMovementsUseCase
 import com.alejandro.domain.util.Constants.EMPTY_STRING
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ProductDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val accountRepository: AccountRepository
+    private val getAccountByAccountNumberUseCase: GetAccountByAccountNumberUseCase,
+    private val getMovementsUseCase: GetMovementsUseCase,
 ) : ViewModel() {
 
     private val _uiState: MutableStateFlow<UiState> = MutableStateFlow(UiState())
@@ -37,7 +39,7 @@ class ProductDetailViewModel @Inject constructor(
 
     private fun getAccountDetail() = viewModelScope.launch {
         try {
-            val result = accountRepository.getAccountByAccountNumber(accountNumber)
+            val result = getAccountByAccountNumberUseCase(accountNumber)
             _uiState.update { it.copy(account = result) }
         } catch (error: Throwable) {
             handleError(error)
@@ -46,7 +48,7 @@ class ProductDetailViewModel @Inject constructor(
 
     private fun getMovements() = viewModelScope.launch {
         try {
-            val result = accountRepository.getMovements(accountNumber)
+            val result = getMovementsUseCase(accountNumber)
             _uiState.update { it.copy(isLoading = false, listMovements = result) }
         } catch (error: Throwable) {
             handleError(error)
