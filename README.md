@@ -30,6 +30,16 @@ El proyecto sigue el enfoque de **Clean Architecture**, organizando las capas de
 - **Capa de Dominio (Domain Layer)**: Contiene la lógica de negocio central y los casos de uso.
 - **Capa de Presentación (Presentation Layer)**: Implementa la UI y gestiona la lógica de presentación con ViewModels.
 
+
+Implementé **Clean Architecture** porque proporciona una estructura modular que mejora la mantenibilidad y escalabilidad del proyecto. Este enfoque me permite:
+
+
+- **Separar responsabilidades**: Cada capa tiene un propósito claro, evitando que la lógica de negocio se mezcle con la UI.
+- **Facilitar la prueba de código**: Gracias a la independencia entre capas, es más fácil escribir pruebas unitarias y de integración.
+- **Promover la reutilización de código**: La capa de dominio es independiente de los frameworks y las fuentes de datos, lo que facilita su uso en otros proyectos o plataformas.
+- **Mejorar la escalabilidad**: Si en el futuro se requiere cambiar la fuente de datos (por ejemplo, de Room a otro almacenamiento), solo es necesario modificar la capa de datos sin afectar el resto de la aplicación.
+
+
 ***********************
 Seguridad
 ***********************
