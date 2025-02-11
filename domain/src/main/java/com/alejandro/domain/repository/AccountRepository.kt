@@ -9,6 +9,8 @@ interface AccountRepository {
 
     suspend fun updateAccount() : List<Account>
 
+    suspend fun saveAccount(account: Account)
+
     suspend fun getAccountByAccountNumber(accountNumber: String) : Account
 
     suspend fun getMovements(accountNumber: String) : List<Movement>

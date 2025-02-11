@@ -20,16 +20,17 @@ class AccountRepositoryImpl @Inject constructor(
 ) : AccountRepository {
     override suspend fun getAccount(): List<Account> = withContext(ioDispatcher) {
         val result = accountApi.getAccount()
-        val listAccount = result.toDomain()
-        insetAccount(listAccount)
-        listAccount
+        result.toDomain()
     }
 
     override suspend fun updateAccount(): List<Account> = withContext(ioDispatcher) {
         val result = accountApi.updateAccount()
-        val listAccount = result.toDomain()
-        insetAccount(listAccount)
-        listAccount
+        result.toDomain()
+    }
+
+    override suspend fun saveAccount(account: Account) {
+        accountDao.deleteAllAccount()
+        accountDao.insertAccount(account.totoDataBase())
     }
 
     override suspend fun getAccountByAccountNumber(
@@ -43,11 +44,5 @@ class AccountRepositoryImpl @Inject constructor(
     ): List<Movement> = withContext(ioDispatcher) {
         val result = accountApi.getMovements(accountNumber)
         result.toDomain()
-    }
-
-    private suspend fun insetAccount(account: List<Account>) = withContext(ioDispatcher) {
-        account.map {
-            accountDao.insertAccount(it.totoDataBase())
-        }
     }
 }
