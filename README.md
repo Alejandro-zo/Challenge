@@ -49,13 +49,12 @@ Animaciones
 Para enriquecer la experiencia de usuario, se han integrado animaciones mediante **Lottie**, optimizando tanto el rendimiento como la estética.
 
 ***********************
+Unit test
+***********************
+
+***********************
 Requisitos del Servidor
 ***********************
 
-Este proyecto requiere **Android API 21** o superior. Asegúrate de utilizar una versión reciente de Android Studio para evitar problemas de compatibilidad.
+Este proyecto requiere **Android API 26** o superior. Asegúrate de utilizar una versión reciente de Android Studio para evitar problemas de compatibilidad.
 
-***********************
-Contacto
-***********************
-
-Si tienes preguntas o sugerencias, no dudes en abrir un **issue** en el repositorio o contactarte con el equipo de desarrollo.

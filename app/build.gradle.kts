@@ -81,6 +81,20 @@ dependencies {
     implementation(libs.lottie.compose)
 
     testImplementation(libs.junit)
+    testImplementation(libs.junit.jupiter)
+    testImplementation(libs.mockk)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.android)
+//    testImplementation(libs.jakewharton.timber)
+    testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.androidx.arch.testing)
+    testImplementation(libs.slf4j.logback)
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlin.faker)
+    testImplementation(libs.androidx.ui.test.junit4)
+    testImplementation(libs.hilt.android.testing)
+
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
