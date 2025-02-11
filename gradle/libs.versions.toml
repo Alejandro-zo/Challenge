@@ -24,6 +24,17 @@ chucker = "4.0.0"
 room = "2.6.1"
 lottie = "6.6.1"
 
+# Testing
+coroutinesVersion = "1.9.0"
+hiltTesting = "2.53.1"
+mockk = "1.13.13"
+kotlinFaker = "1.16.0"
+slf4jLogback = "1.5.6"
+junitJupiter = "5.8.1"
+mockito = "5.14.2"
+coreTesting = "2.2.0"
+timber = "5.0.1"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -61,6 +72,20 @@ chucker-release = { group = "com.github.chuckerteam.chucker", name = "library-no
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
 lottie-compose = { group = "com.airbnb.android", name = "lottie-compose", version.ref = "lottie" }
+
+# Testing
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+mockk-android = { group = "io.mockk", name = "mockk-android", version.ref = "mockk" }
+mockito-core = { group = "org.mockito", name = "mockito-core", version.ref = "mockito" }
+mockito-android = { group = "org.mockito", name = "mockito-android", version.ref = "mockito" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutinesVersion" }
+androidx-arch-testing = { group = "androidx.arch.core", name = "core-testing", version.ref = "coreTesting" }
+jakewharton-timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
+hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hiltTesting" }
+junit-jupiter = { group = "org.junit.jupiter", name = "junit-jupiter", version.ref = "junitJupiter" }
+kotlin-faker = { group = "io.github.serpro69", name = "kotlin-faker", version.ref = "kotlinFaker" }
+slf4j-logback = { group = "ch.qos.logback", name = "logback-classic", version.ref = "slf4jLogback" }
+ktor-client-mock = { group = "io.ktor", name = "ktor-client-mock", version.ref = "ktor" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
