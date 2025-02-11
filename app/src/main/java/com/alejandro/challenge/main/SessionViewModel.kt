@@ -1,7 +1,8 @@
 package com.alejandro.challenge.main
 
 import androidx.lifecycle.ViewModel
-import com.alejandro.domain.repository.AppParameterRepository
+import com.alejandro.domain.usecase.appparameters.DeleteAllParameterUseCase
+import com.alejandro.domain.usecase.appparameters.GetSessionTimeUseCase
 import com.alejandro.domain.util.Constants.SESSION_TIME
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -15,7 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class SessionViewModel @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher,
-    private val appParameterRepository: AppParameterRepository,
+    private val getSessionTimeUseCase: GetSessionTimeUseCase,
+    private val deleteAllParameterUseCase: DeleteAllParameterUseCase,
 ) : ViewModel() {
 
     private val _timeRemaining = MutableStateFlow(SESSION_TIME)
@@ -27,7 +29,7 @@ class SessionViewModel @Inject constructor(
 
     suspend fun updateLastActivity() {
         _timeRemaining.value = SESSION_TIME
-        lastActivityTime = appParameterRepository.getSessionTime() + SESSION_TIME
+        lastActivityTime = getSessionTimeUseCase() + SESSION_TIME
         _isSessionExpired.value = false
         startSessionTimer()
     }
@@ -46,6 +48,6 @@ class SessionViewModel @Inject constructor(
     }
 
     private suspend fun deleteSession() = withContext(ioDispatcher) {
-        appParameterRepository.deleteAllParameter()
+        deleteAllParameterUseCase()
     }
 }

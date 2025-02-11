@@ -4,7 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.alejandro.challenge.R
 import com.alejandro.domain.entity.Account
-import com.alejandro.domain.repository.AccountRepository
+import com.alejandro.domain.usecase.account.GetAccountUseCase
+import com.alejandro.domain.usecase.account.SaveAccountUseCase
+import com.alejandro.domain.usecase.account.UpdateAccountUseCase
 import com.alejandro.domain.util.AccountException
 import com.alejandro.domain.util.UpdateAccountException
 import com.alejandro.domain.util.isUnknownHostException
@@ -18,7 +20,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val accountRepository: AccountRepository
+    private val getAccountUseCase: GetAccountUseCase,
+    private val updateAccountUseCase: UpdateAccountUseCase,
+    private val saveAccountUseCase: SaveAccountUseCase,
 ) : ViewModel() {
 
     private val _uiState: MutableStateFlow<UiState> = MutableStateFlow(UiState())
@@ -37,7 +41,7 @@ class HomeViewModel @Inject constructor(
 
     private fun getAccount() = viewModelScope.launch {
         try {
-            val result = accountRepository.getAccount()
+            val result = getAccountUseCase()
             _uiState.update { it.copy(isLoading = false, listAccount = result, errorData = false) }
         } catch (error: Throwable) {
             val customError = if (!error.isUnknownHostException()) AccountException() else error
@@ -53,7 +57,7 @@ class HomeViewModel @Inject constructor(
     private fun updateAccount() = viewModelScope.launch {
         _uiState.update { it.copy(isRefreshing = true) }
         try {
-            val result = accountRepository.updateAccount()
+            val result = updateAccountUseCase()
             _uiState.update {
                 it.copy(
                     isRefreshing = false,
@@ -86,6 +90,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun clickAccount(account: Account) = viewModelScope.launch {
+        saveAccountUseCase(account)
         _uiState.update {
             it.copy(
                 accountNumber = account.accountNumber,

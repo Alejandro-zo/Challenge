@@ -2,8 +2,10 @@ package com.alejandro.challenge.feature.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.alejandro.domain.repository.AppParameterRepository
-import com.alejandro.domain.repository.AuthRepository
+import com.alejandro.domain.usecase.appparameters.DeleteAllParameterUseCase
+import com.alejandro.domain.usecase.appparameters.SaveSessionTimeUseCase
+import com.alejandro.domain.usecase.auth.LoginUseCase
+import com.alejandro.domain.usecase.auth.SaveUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,8 +16,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val authRepository: AuthRepository,
-    private val appParameterRepository: AppParameterRepository
+    private val saveUserUseCase: SaveUserUseCase,
+    private val deleteAllParameterUseCase: DeleteAllParameterUseCase,
+    private val loginUseCase: LoginUseCase,
+    private val saveSessionTimeUseCase: SaveSessionTimeUseCase,
 ) : ViewModel() {
 
     private val _uiState: MutableStateFlow<UiState> = MutableStateFlow(UiState())
@@ -35,12 +39,12 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun insertDate() = viewModelScope.launch {
-        authRepository.saveUser()
+        saveUserUseCase()
         deleteSession()
     }
 
     private fun deleteSession() = viewModelScope.launch {
-        appParameterRepository.deleteAllParameter()
+        deleteAllParameterUseCase()
     }
 
     private fun userChanged(value: String) {
@@ -60,7 +64,8 @@ class LoginViewModel @Inject constructor(
     private fun buttonClickedEnter() = viewModelScope.launch {
         _uiState.update { it.copy(isLoading = true) }
         try {
-            authRepository.login(_formState.value.user, _formState.value.password)
+            loginUseCase(_formState.value.user, _formState.value.password)
+            saveSessionTimeUseCase(System.currentTimeMillis())
             _uiState.update { it.copy(navigateToHome = true) }
         } catch (error: Throwable) {
             _uiState.update { it.copy(error = error, isLoading = false) }
