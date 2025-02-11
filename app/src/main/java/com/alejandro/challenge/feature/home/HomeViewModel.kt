@@ -28,6 +28,8 @@ class HomeViewModel @Inject constructor(
     private val _uiState: MutableStateFlow<UiState> = MutableStateFlow(UiState())
     val uiState: StateFlow<UiState> get() = _uiState.asStateFlow()
 
+    private var isLoadedData = false
+
     fun handleUiEvent(uiEvent: UiEvent) {
         when (uiEvent) {
             is UiEvent.ServiceData -> getAccount()
@@ -40,9 +42,11 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getAccount() = viewModelScope.launch {
+        if (isLoadedData) return@launch
         try {
             val result = getAccountUseCase()
             _uiState.update { it.copy(isLoading = false, listAccount = result, errorData = false) }
+            isLoadedData = true
         } catch (error: Throwable) {
             val customError = if (!error.isUnknownHostException()) AccountException() else error
             handleError(customError, R.string.failed_to_get_accounts)
